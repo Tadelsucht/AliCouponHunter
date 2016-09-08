@@ -2,6 +2,7 @@ Geht alle Google Einträge ab sucht nach Gutscheinen, welche folgendes Kriteritu
 
 
 Beispiel-Daten:<br />
-https://www.google.de/?gws_rd=ssl#q=inurl:aliexpress.com/store/+intext:%22Get+coupon+now%22&start=0
-https://shinehair.de.aliexpress.com/store/209446
-https://de.aliexpress.com/store/1303558
+https://www.google.de/search?q=inurl:aliexpress.com/store/+intext:%22Get+coupon+now%22&filter=0<br />
+&filter=0<br />
+https://shinehair.de.aliexpress.com/store/209446<br />
+https://de.aliexpress.com/store/1303558<br />
