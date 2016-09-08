@@ -9,7 +9,7 @@ from Database.Table.Processed import Processed
 
 # Config
 stop_error_number = 10
-sleep_time = 5
+sleep_time = 10
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            'Accept-Encoding': 'deflate'}
 language_subdomain = "de"
