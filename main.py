@@ -34,7 +34,6 @@ while maximum_bing_searches > 0:
     search_result = bing.search(format='json')
     for page in search_result:
         url = page.url.replace("www.", "{0}.".format(language_subdomain))
-        url = "http://de.aliexpress.com/store/739947"
         logging.info(url)
         try:
             id = re.match('.*store/(\d+).*', url).group(1)
