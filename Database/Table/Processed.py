@@ -7,7 +7,7 @@ class Processed(Database):
 
     def save(self, id, shop, keywords, url, bcd):
         self._cursor.execute(
-            u"INSERT INTO {0} (ID, Shop, Keywords, URL, BestCouponDifference, AddedOrUpdated) VALUES (?,?,?,?,?);".format(
+            u"INSERT INTO {0} (ID, Shop, Keywords, URL, BestCouponDifference, AddedOrUpdated) VALUES (?,?,?,?,?,?);".format(
                 self._database_name),
             (id, shop, keywords, url, bcd, datetime.now()))
         self._connection.commit()
