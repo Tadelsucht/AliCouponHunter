@@ -3,7 +3,7 @@ from Database.Database import Database
 
 
 class Processed(Database):
-    _sql_table = u'''CREATE TABLE {0} (ID INT PRIMARY KEY, Shop TEXT, Keywords TEXT, URL TEXT, BestCouponDifference TEXT, AddedOrUpdated TIMESTAMP)'''
+    _sql_table = u'''CREATE TABLE {0} (ID INT PRIMARY KEY, Shop TEXT, Keywords TEXT, URL TEXT, BestCouponDifference DOUBLE, AddedOrUpdated TIMESTAMP)'''
 
     def save(self, id, shop, keywords, url, bcd):
         self._cursor.execute(
