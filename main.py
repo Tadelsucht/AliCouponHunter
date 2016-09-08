@@ -1,4 +1,5 @@
 import logging
+import random
 
 import re
 import requests
@@ -12,7 +13,8 @@ from Database.Table.Processed import Processed
 # Config
 maximum_bing_searches = 100
 stop_error_number = 10
-sleep_time = 16
+sleep_time = 20
+sleep_time_plus_minus = 5
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            'Accept-Encoding': 'deflate'}
 language_subdomain = "de"
@@ -60,5 +62,6 @@ while maximum_bing_searches > 0:
             stop_error_number -= 1
             if stop_error_number < 0:
                 sys.exit("To many errors!")
-        logging.info("Wait for {0} Seconds.".format(sleep_time))
-        time.sleep(sleep_time)
+        sleep = random.randint(sleep_time - sleep_time_plus_minus, sleep_time + sleep_time_plus_minus)
+        logging.info("Wait for {0} Seconds.".format(sleep))
+        time.sleep(sleep)
