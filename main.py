@@ -59,4 +59,4 @@ while maximum_bing_searches > 0:
             stop_error_number -= 1
             if stop_error_number < 0:
                 sys.exit("To many errors!")
-            time.sleep(sleep_time)
+        time.sleep(sleep_time)
