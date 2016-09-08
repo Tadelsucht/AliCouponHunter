@@ -34,9 +34,11 @@ while maximum_bing_searches > 0:
     search_result = bing.search(format='json')
     for page in search_result:
         url = page.url.replace("www.", "{0}.".format(language_subdomain))
+        url = "http://de.aliexpress.com/store/739947"
         logging.info(url)
         try:
-            if db.get_is_processed(url):
+            id = re.match('.*store/(\d+).*', url).group(1)
+            if db.get_is_processed(id):
                 html = requests.get(url, headers=headers).text
                 soup = BeautifulSoup(html)
                 shop = soup.find("span", {"class": "shop-name"}).a.text
@@ -47,10 +49,10 @@ while maximum_bing_searches > 0:
                     minimum_purchase = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "get"}))).group(1)
                     coupons.append(float(minimum_purchase) - float(discount))
                 if len(coupons) is not 0:
-                    db.save(shop, keywords, url, min(coupons))
+                    db.save(id, shop, keywords, url, min(coupons))
                     logging.info("Saved with coupon.")
                 else:
-                    db.save(shop, keywords, url, None)
+                    db.save(id, shop, keywords, url, None)
                     logging.info("Saved without coupon.")
             else:
                 logging.info("Already done.")
@@ -59,4 +61,5 @@ while maximum_bing_searches > 0:
             stop_error_number -= 1
             if stop_error_number < 0:
                 sys.exit("To many errors!")
+        logging.info("Wait for {0} Seconds.".format(sleep_time))
         time.sleep(sleep_time)
