@@ -51,7 +51,8 @@ while maximum_bing_searches > 0:
                     minimum_purchase = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "get"}))).group(1)
                     coupons.append(float(minimum_purchase) - float(discount))
                 if len(coupons) is not 0:
-                    db.save(id, shop, keywords, url, discount, minimum_purchase, min(coupons))
+                    # TODO FIX DISCOUNT
+                    db.save(id, shop, keywords, url, None, None, min(coupons))
                     logging.info("Saved with coupon.")
                 else:
                     db.save(id, shop, keywords, url, None, None, None)
