@@ -55,12 +55,12 @@ while maximum_bing_searches > 0:
                 else:
                     db.save(id, shop, keywords, url, None)
                     logging.info("Saved without coupon.")
+
+                sleep = random.randint(sleep_time - sleep_time_plus_minus, sleep_time + sleep_time_plus_minus)
+                logging.info("Wait for {0} Seconds.".format(sleep))
+                time.sleep(sleep)
             else:
                 logging.info("Already done.")
-
-            sleep = random.randint(sleep_time - sleep_time_plus_minus, sleep_time + sleep_time_plus_minus)
-            logging.info("Wait for {0} Seconds.".format(sleep))
-            time.sleep(sleep)
 
         except Exception as e:
             logging.error("{1}".format(url, str(e)))
