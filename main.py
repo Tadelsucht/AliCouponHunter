@@ -38,7 +38,7 @@ while maximum_bing_searches > 0:
         logging.info(url)
         try:
             id = re.match('.*store/(\d+).*', url).group(1)
-            if db.get_is_processed(id):
+            if not db.get_is_processed(id):
                 html = requests.get(url, headers=headers).text
                 soup = BeautifulSoup(html)
                 shop = soup.find("span", {"class": "shop-name"}).a.text
