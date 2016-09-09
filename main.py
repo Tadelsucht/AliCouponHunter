@@ -11,7 +11,7 @@ from py_bing_search import PyBingWebSearch
 from Database.Table.Processed import Processed
 
 # Config
-maximum_bing_searches = 2500
+maximum_bing_searches = 1000
 stop_consecutively_error_number = 10
 sleep_time = 20
 sleep_time_plus_minus = 5
@@ -36,6 +36,11 @@ while maximum_bing_searches > 0:
     maximum_bing_searches -= 1
 
     search_result = bing.search(format='json')
+
+    if len(search_result) == 0:
+        logging.error("No search results.")
+        error_counter += 1
+
     for page in search_result:
         url = page.url.replace("www.", "{0}.".format(language_subdomain))
         logging.info(url)
@@ -72,5 +77,6 @@ while maximum_bing_searches > 0:
         except Exception as e:
             logging.error("{1}".format(url, str(e)))
             error_counter += 1
-            if error_counter > stop_consecutively_error_number:
-                sys.exit("To many errors!")
+
+        if error_counter > stop_consecutively_error_number:
+            sys.exit("Stop because to many errors!")
