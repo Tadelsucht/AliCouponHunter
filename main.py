@@ -13,7 +13,6 @@ from BeautifulSoup import BeautifulSoup
 from py_bing_search import PyBingWebSearch
 from Database.Table.Processed import Processed
 
-
 # Config
 maximum_bing_searches = 1000
 stop_consecutively_error_number = 5
@@ -48,6 +47,7 @@ def sleep_to_prevent_ban():
     sleep = random.randint(sleep_time - sleep_time_plus_minus, sleep_time + sleep_time_plus_minus)
     logging.info("Wait for {0} Seconds.".format(sleep))
     time.sleep(sleep)
+
 
 # TODO: Start Info. Wie viele sind in der Datenbank?
 
@@ -112,8 +112,8 @@ while bing_search_counter is not maximum_bing_searches:
                     item_price = float(item[2].encode("ascii", "ignore"))
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                         item_price = float(item[4].encode("ascii", "ignore"))
-                    if (cheapest_item_price is None or item_price < cheapest_item_price):
-                        if all(word.lower() not in item_name for word in forbidden_item_phrases):
+                    if cheapest_item_price is None or item_price < cheapest_item_price:
+                        if all(word.lower() not in item_name.lower() for word in forbidden_item_phrases):
                             cheapest_item = item_name
                             cheapest_item_price = item_price
                         else:
