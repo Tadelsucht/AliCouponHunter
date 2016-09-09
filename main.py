@@ -97,7 +97,7 @@ while bing_search_counter is not maximum_bing_searches:
                 cheapest_item = None
                 cheapest_item_price = None
                 items = re.findall(
-                    ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
+                    ur'subject":"([\w\s ÄÖÜäöüß]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
                     mobile_html)
                 for item in items:
                     item_name = item[0]
@@ -107,6 +107,8 @@ while bing_search_counter is not maximum_bing_searches:
                     if cheapest_item_price is None or item_price < cheapest_item_price:
                         cheapest_item = item_name
                         cheapest_item_price = item_price
+
+                # TODO: Versandkosten aufzeichnen btw. yes and no
 
                 # Save
                 db.save(id, shop, keywords, url, best_discount, best_minimum_purchase, best_coupon_difference,
