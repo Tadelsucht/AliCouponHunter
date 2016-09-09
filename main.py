@@ -23,9 +23,12 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/201
 language_subdomain = "de"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
+
+# forbidden_item_phrases
 forbidden_item_phrases = []
 with io.open('forbidden_item_phrases.txt', 'r', encoding='utf8') as f:
     forbidden_item_phrases = f.readlines()
+    forbidden_item_phrases = map(lambda s: s.strip(), forbidden_item_phrases)
 
 # DB
 db = Processed("ach.sqlite", "processed")

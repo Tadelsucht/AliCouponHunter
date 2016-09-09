@@ -1,8 +1,13 @@
 # coding: utf8
-cheapest_item_forbidden_words = [u'Zusätzlich', u'Gebühr', u'Unterschied', u'DHL']
-item_name = u"Die extraverschiffengebühr zahlen als vereinbarung"
+import io
 
-if all(word.lower() not in item_name.lower() for word in cheapest_item_forbidden_words):
-    print "TRUE"
+forbidden_item_phrases = []
+with io.open('forbidden_item_phrases.txt', 'r', encoding='utf8') as f:
+    forbidden_item_phrases = f.readlines()
+    forbidden_item_phrases = map(lambda s: s.strip(), forbidden_item_phrases)
+item_name = u"Die extraverschiffengebühr zahlen als vereinbarung"
+print forbidden_item_phrases
+if any(word.lower() in item_name.lower() for word in forbidden_item_phrases):
+    print "Forbidden"
 else:
-    print "FALSE"
+    print "Allowed"
