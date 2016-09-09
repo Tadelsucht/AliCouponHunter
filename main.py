@@ -12,28 +12,29 @@ from Database.Table.Processed import Processed
 
 # Config
 maximum_bing_searches = 1000
-stop_consecutively_error_number = 10
+stop_consecutively_error_number = 5
 sleep_time = 20
 sleep_time_plus_minus = 5
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            'Accept-Encoding': 'deflate'}
 language_subdomain = "de"
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 # DB
 db = Processed("ach.sqlite", "processed")
 
 # BING
-bing_api_key = '6gmJGqJOlN6VmeMkp0j4iA46Ayetcjz49YUfBh/7Nc4'
+bing_api_key = '9/y/HMPWxhiYA2W5VXejrHvQkkdwNJb0+vvo7Skdfuc'
 search_term = 'site:www.aliexpress.com/store/ inbody:"Get coupon now"'
 
 # DO
 error_counter = 0
 bing = PyBingWebSearch(bing_api_key, search_term, web_only=False)
-while maximum_bing_searches > 0:
-    logging.info("Bing searches left: {0}".format(maximum_bing_searches))
-    maximum_bing_searches -= 1
+bing_search_counter = 0
+while bing_search_counter is not maximum_bing_searches:
+    logging.info("Links checked: {2} | Bing searches: {0}/{1}".format(bing_search_counter, maximum_bing_searches, bing_search_counter*50))
+    bing_search_counter += 1
 
     search_result = bing.search(format='json')
 
