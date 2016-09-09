@@ -116,7 +116,7 @@ while bing_search_counter is not maximum_bing_searches:
                         "Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Minimum purchase: {3} | Price of cheapest item: {2}".format(
                             best_coupon_difference, best_discount, cheapest_item_price, minimum_purchase))
                 else:
-                    logging.info("Saved without coupon.")
+                    logging.info("Saved without coupon. | Price of cheapest item: {0}".format(cheapest_item_price))
 
                 # Sleep
                 sleep_to_prevent_ban()
