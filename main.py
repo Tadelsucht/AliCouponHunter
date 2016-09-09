@@ -43,6 +43,7 @@ def sleep_to_prevent_ban():
     logging.info("Wait for {0} Seconds.".format(sleep))
     time.sleep(sleep)
 
+# TODO: Start Info. Wie viele sind in der Datenbank?
 
 while bing_search_counter is not maximum_bing_searches:
     logging.info("Links checked: {2} | Bing searches: {0}/{1}".format(bing_search_counter, maximum_bing_searches,

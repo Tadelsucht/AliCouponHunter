@@ -14,3 +14,4 @@ https://m.{0}.aliexpress.com/search.htm?sortType=PP_A&sellerAdminSeq={1}<br />
 
 # To Do
 Stückzahl beachten?<br />
+get_is_processed sollte eine processed again eigenschaft haben<br />
