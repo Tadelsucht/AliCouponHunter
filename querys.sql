@@ -1,1 +1,5 @@
-SELECT * FROM processed WHERE BestCouponDifference < 2 AND (CheapestItemPrice - Discount) < 2
+SELECT (CheapestItemPrice - Discount), CheapestItem, URL AS 'Price'
+FROM processed
+WHERE Discount IS NOT NULL
+	AND  BestCouponDifference < 1
+ORDER BY (CheapestItemPrice - Discount)  ASC
