@@ -1,3 +1,4 @@
+# coding: utf8
 import logging
 import random
 
@@ -95,10 +96,14 @@ while bing_search_counter is not maximum_bing_searches:
                 mobile_html = requests_session.get(mobile_url).text
                 cheapest_item = None
                 cheapest_item_price = None
-                items = re.findall(ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)', mobile_html)
+                items = re.findall(
+                    ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
+                    mobile_html)
                 for item in items:
                     cheapest_item = item[0]
                     item_price = float(item[2].encode("ascii", "ignore"))
+                    if item_price == 0.01:  # Default promo is 0.01, use other value for this case
+                        item_price = float(item[4].encode("ascii", "ignore"))
                     if cheapest_item_price is None or item_price < cheapest_item_price:
                         cheapest_item = item
                         cheapest_item_price = item_price
@@ -107,8 +112,9 @@ while bing_search_counter is not maximum_bing_searches:
                 db.save(id, shop, keywords, url, best_discount, best_minimum_purchase, best_coupon_difference,
                         cheapest_item, cheapest_item_price)
                 if best_coupon_difference is not None:
-                    logging.info("Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Cheapest item: {2}".format(
-                        best_coupon_difference, best_discount, cheapest_item_price))
+                    logging.info(
+                        "Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Minimum purchase: {3} | Price of cheapest item: {2}".format(
+                            best_coupon_difference, best_discount, cheapest_item_price, minimum_purchase))
                 else:
                     logging.info("Saved without coupon.")
 
@@ -119,7 +125,6 @@ while bing_search_counter is not maximum_bing_searches:
                 error_counter = 0
             else:
                 logging.info("Already done.")
-
         except Exception as e:
             logging.error("{1}".format(url, str(e)))
             error_counter += 1
