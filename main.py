@@ -94,23 +94,23 @@ while bing_search_counter is not maximum_bing_searches:
                 mobile_url = "https://m.{0}.aliexpress.com/search.htm?sortType=PP_A&sellerAdminSeq={1}".format(
                     language_subdomain, mobile_id)
                 mobile_html = requests_session.get(mobile_url).text
-                cheapest_item = None
+                cheapest_item_name = None
                 cheapest_item_price = None
                 items = re.findall(
                     ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
                     mobile_html)
-                for item in items:
-                    item = item[0]
-                    item_price = float(item[2].encode("ascii", "ignore"))
+                for item_name in items:
+                    item_name = item_name[0]
+                    item_price = float(item_name[2].encode("ascii", "ignore"))
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
-                        item_price = float(item[4].encode("ascii", "ignore"))
+                        item_price = float(item_name[4].encode("ascii", "ignore"))
                     if cheapest_item_price is None or item_price < cheapest_item_price:
-                        cheapest_item = item
+                        cheapest_item_name = item_name
                         cheapest_item_price = item_price
 
                 # Save
                 db.save(id, shop, keywords, url, best_discount, best_minimum_purchase, best_coupon_difference,
-                        cheapest_item, cheapest_item_price)
+                        cheapest_item_name, cheapest_item_price)
                 if best_coupon_difference is not None:
                     logging.info(
                         "Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Minimum purchase: {2} | Price of cheapest item: {3}".format(
