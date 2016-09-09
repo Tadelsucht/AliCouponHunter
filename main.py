@@ -11,7 +11,7 @@ from py_bing_search import PyBingWebSearch
 from Database.Table.Processed import Processed
 
 # Config
-maximum_bing_searches = 100
+maximum_bing_searches = 2500
 stop_consecutively_error_number = 10
 sleep_time = 20
 sleep_time_plus_minus = 5
@@ -32,6 +32,7 @@ search_term = 'site:www.aliexpress.com/store/ inbody:"Get coupon now"'
 error_counter = 0
 bing = PyBingWebSearch(bing_api_key, search_term, web_only=False)
 while maximum_bing_searches > 0:
+    logging.info("Bing searches left: {0}".format(maximum_bing_searches))
     maximum_bing_searches -= 1
 
     search_result = bing.search(format='json')
