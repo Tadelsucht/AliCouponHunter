@@ -21,7 +21,9 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/201
 language_subdomain = "de"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
-cheapest_item_forbidden_words = [u'Zusätzlich', u'Gebühr', u'preis unterschied', u'Preisunterschied']
+forbidden_item_phrases = []
+with open('forbidden_item_phrases.txt', 'r', encoding='utf8') as f:
+    forbidden_item_phrases = f.readlines()
 
 # DB
 db = Processed("ach.sqlite", "processed")
@@ -107,7 +109,7 @@ while bing_search_counter is not maximum_bing_searches:
                     item_price = float(item[2].encode("ascii", "ignore"))
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                         item_price = float(item[4].encode("ascii", "ignore"))
-                    if (cheapest_item_price is None or item_price < cheapest_item_price) and all(word.lower() not in item_name for word in cheapest_item_forbidden_words):
+                    if (cheapest_item_price is None or item_price < cheapest_item_price) and all(word.lower() not in item_name for word in forbidden_item_phrases):
                         cheapest_item = item_name
                         cheapest_item_price = item_price
 
