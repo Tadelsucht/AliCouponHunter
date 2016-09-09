@@ -60,9 +60,9 @@ while bing_search_counter is not maximum_bing_searches:
     for page in search_result:
         try:
             url = page.url
-            logging.info(url)
             url = url.replace("www.", "{0}.".format(language_subdomain))
             url = re.match('(https?://\w+.aliexpress.com/store/\d+).*', url).group(1)
+            logging.info(url)
 
             id = re.match('.*store/(\d+).*', url).group(1)
             if not db.get_is_processed(id):
