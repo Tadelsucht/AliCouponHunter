@@ -100,7 +100,7 @@ while bing_search_counter is not maximum_bing_searches:
                     ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
                     mobile_html)
                 for item in items:
-                    cheapest_item = item[0]
+                    item = item[0]
                     item_price = float(item[2].encode("ascii", "ignore"))
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                         item_price = float(item[4].encode("ascii", "ignore"))
