@@ -21,7 +21,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/201
 language_subdomain = "de"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
-cheapest_item_forbidden_words = [u'Zusätzlich', u'Gebühr', u'Unterschied', u'DHL']
+cheapest_item_forbidden_words = [u'Zusätzlich', u'Gebühr', u'preis unterschied', u'Preisunterschied']
 
 # DB
 db = Processed("ach.sqlite", "processed")
