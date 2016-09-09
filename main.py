@@ -113,8 +113,8 @@ while bing_search_counter is not maximum_bing_searches:
                         cheapest_item, cheapest_item_price)
                 if best_coupon_difference is not None:
                     logging.info(
-                        "Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Minimum purchase: {3} | Price of cheapest item: {2}".format(
-                            best_coupon_difference, best_discount, cheapest_item_price, minimum_purchase))
+                        "Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Minimum purchase: {2} | Price of cheapest item: {3}".format(
+                            best_coupon_difference, best_discount, best_minimum_purchase, cheapest_item_price))
                 else:
                     logging.info("Saved without coupon. | Price of cheapest item: {0}".format(cheapest_item_price))
 
