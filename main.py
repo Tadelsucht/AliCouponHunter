@@ -3,6 +3,8 @@ import logging
 import random
 
 import re
+
+import io
 import requests
 import time
 
@@ -10,6 +12,7 @@ import sys
 from BeautifulSoup import BeautifulSoup
 from py_bing_search import PyBingWebSearch
 from Database.Table.Processed import Processed
+
 
 # Config
 maximum_bing_searches = 1000
@@ -22,7 +25,7 @@ language_subdomain = "de"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
 forbidden_item_phrases = []
-with open('forbidden_item_phrases.txt', 'r', encoding='utf8') as f:
+with io.open('forbidden_item_phrases.txt', 'r', encoding='utf8') as f:
     forbidden_item_phrases = f.readlines()
 
 # DB
@@ -109,9 +112,12 @@ while bing_search_counter is not maximum_bing_searches:
                     item_price = float(item[2].encode("ascii", "ignore"))
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                         item_price = float(item[4].encode("ascii", "ignore"))
-                    if (cheapest_item_price is None or item_price < cheapest_item_price) and all(word.lower() not in item_name for word in forbidden_item_phrases):
-                        cheapest_item = item_name
-                        cheapest_item_price = item_price
+                    if (cheapest_item_price is None or item_price < cheapest_item_price):
+                        if all(word.lower() not in item_name for word in forbidden_item_phrases):
+                            cheapest_item = item_name
+                            cheapest_item_price = item_price
+                        else:
+                            logging.info("Filtered phrase was found.")
 
                 # TODO: Versandkosten aufzeichnen btw. yes and no
 
