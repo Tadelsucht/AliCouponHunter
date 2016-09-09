@@ -13,7 +13,7 @@ from Database.Table.Processed import Processed
 # Config
 maximum_bing_searches = 1000
 stop_consecutively_error_number = 5
-sleep_time = 15
+sleep_time = 10
 sleep_time_plus_minus = 5
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            'Accept-Encoding': 'deflate'}
@@ -94,18 +94,21 @@ while bing_search_counter is not maximum_bing_searches:
                     language_subdomain, mobile_id)
                 mobile_html = requests_session.get(mobile_url).text
                 cheapest_item = None
-                items = re.findall(r'promoMaxAmount":{"value":([\d\.]+)', mobile_html)
+                cheapest_item_price = None
+                items = re.findall(ur'subject":"([\w\s ÄÖÜäöü]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)', mobile_html)
                 for item in items:
-                    item = float(item)
-                    if cheapest_item is None or item < cheapest_item:
+                    cheapest_item = item[0]
+                    item_price = float(item[2].encode("ascii", "ignore"))
+                    if cheapest_item_price is None or item_price < cheapest_item_price:
                         cheapest_item = item
+                        cheapest_item_price = item_price
 
                 # Save
                 db.save(id, shop, keywords, url, best_discount, best_minimum_purchase, best_coupon_difference,
-                        cheapest_item)
+                        cheapest_item, cheapest_item_price)
                 if best_coupon_difference is not None:
                     logging.info("Saved with coupon. | Difference: {0:.2f} | Discount: {1} | Cheapest item: {2}".format(
-                        best_coupon_difference, best_discount, cheapest_item))
+                        best_coupon_difference, best_discount, cheapest_item_price))
                 else:
                     logging.info("Saved without coupon.")
 
