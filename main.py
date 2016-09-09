@@ -100,7 +100,8 @@ requests_session.headers = headers
 
 url = "https://de.aliexpress.com/store/1770396"
 url = re.match('(https?://\w+.aliexpress.com/store/\d+).*', url).group(1)
-requests_session.headers.update({'referer': url})
+requests_session.get(url).text
+time.sleep(10)
 
 url += "/search?origin=n&SortType=price_asc"
 html = requests_session.get(url).text
