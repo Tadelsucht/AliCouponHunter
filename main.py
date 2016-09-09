@@ -113,11 +113,11 @@ while bing_search_counter is not maximum_bing_searches:
                     if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                         item_price = float(item[4].encode("ascii", "ignore"))
                     if cheapest_item_price is None or item_price < cheapest_item_price:
-                        if all(word.lower() not in item_name.lower() for word in forbidden_item_phrases):
+                        if any(word.lower() in item_name.lower() for word in forbidden_item_phrases):
+                            logging.info("Filtered phrase was found.")
+                        else:
                             cheapest_item = item_name
                             cheapest_item_price = item_price
-                        else:
-                            logging.info("Filtered phrase was found.")
 
                 # TODO: Versandkosten aufzeichnen btw. yes and no
 
