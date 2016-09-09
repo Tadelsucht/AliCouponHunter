@@ -13,7 +13,7 @@ from Database.Table.Processed import Processed
 # Config
 maximum_bing_searches = 1000
 stop_consecutively_error_number = 5
-sleep_time = 20
+sleep_time = 15
 sleep_time_plus_minus = 5
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            'Accept-Encoding': 'deflate'}
@@ -62,6 +62,7 @@ while bing_search_counter is not maximum_bing_searches:
         try:
             id = re.match('.*store/(\d+).*', url).group(1)
             if not db.get_is_processed(id):
+                logging.error("Get Coupons.")
                 html = requests_session.get(url, headers=headers).text
                 soup = BeautifulSoup(html)
 
@@ -70,12 +71,10 @@ while bing_search_counter is not maximum_bing_searches:
                 keywords = soup.find(attrs={"name": "keywords"})["content"]
 
                 # Coupon
-                logging.error("Get Coupons.")
                 best_discount = None
                 best_minimum_purchase = None
                 best_coupon_difference = None
                 for coupon in soup.findAll("a", {"class": "get-coupon-btn"}):
-                    # TODO: Replace match with search
                     discount = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "pay"}))).group(1)
                     minimum_purchase = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "get"}))).group(1)
                     coupon_difference = float(minimum_purchase) - float(discount)

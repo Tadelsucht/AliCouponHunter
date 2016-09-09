@@ -10,3 +10,6 @@ site:www.aliexpress.com/store/ inbody:"Get coupon now"<br />
 www zum verhindern von de, us usw.<br />
 https://shinehair.de.aliexpress.com/store/209446<br />
 https://de.aliexpress.com/store/1303558<br />
+
+# To Do
+Stückzahl beachten?<br />
