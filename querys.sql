@@ -23,7 +23,11 @@ WHERE CheapestItem LIKE "%Zusätzlich%"
 	OR CheapestItem LIKE "%Hinzufügen%"
 	OR CheapestItem LIKE "%differenz%"
 	OR CheapestItem LIKE "%transaktion%"
-	OR (CheapestItem LIKE "%Versandkosten%" AND CheapestItem NOT LIKE "%Versandkosten frei%")
+	OR CheapestItem LIKE "%Extra Versandkosten%"
+	OR CheapestItem LIKE "%Dieser Artikel ist für die Versandkosten%"
+	OR CheapestItem LIKE "%Spezielle Verbindung%"
+	OR CheapestItem LIKE "%fracht%"
+	OR (CheapestItem LIKE "%Versandkosten%" AND CheapestItem NOT LIKE "%Versandkosten frei%" AND CheapestItem NOT LIKE "%versandkostenfrei%")
 	
 
 SELECT * 

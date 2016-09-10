@@ -87,8 +87,8 @@ while bing_search_counter is not maximum_bing_searches:
                 best_minimum_purchase = None
                 best_coupon_difference = None
                 for coupon in soup.findAll("a", {"class": "get-coupon-btn"}):
-                    discount = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "pay"}))).group(1)
-                    minimum_purchase = re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "get"}))).group(1)
+                    discount = float(re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "pay"}))).group(1))
+                    minimum_purchase = float(re.match('.*\$([0-9\.]+).*', str(coupon.find("span", {"class": "get"}))).group(1))
                     coupon_difference = float(minimum_purchase) - float(discount)
                     if best_coupon_difference is None or coupon_difference < best_coupon_difference or (
                                     coupon_difference is best_coupon_difference and best_discount < discount):
