@@ -63,10 +63,12 @@ for phrase in item_phrases:
     logging.info(
         "Links checked: {0} | Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
 
+    ignore_equality = False  # Todo : Ist nicht best practicse
     first_page_shops = None
     current_page_shops = None
     page = 0
-    while current_page_shops is None or current_page_shops != first_page_shops:
+    while current_page_shops is None or current_page_shops != first_page_shops or ignore_equality:
+        ignore_equality = False
         page += 1
         logging.info("Item phrase: {0} | Page: {1}".format(phrase, page))
 
@@ -78,6 +80,7 @@ for phrase in item_phrases:
 
         if first_page_shops is None:
             first_page_shops = current_page_shops
+            ignore_equality = True
 
         if len(current_page_shops) == 0:
             logging.error("No search results.")
