@@ -34,6 +34,14 @@ WHERE CheapestItem LIKE "%Zusätzlich%"
 	OR CheapestItem LIKE "%Dieser Artikel ist für die Versandkosten%"
 	OR CheapestItem LIKE "%Spezielle Verbindung%"
 	OR CheapestItem LIKE "%fracht%"
+	OR CheapestItem LIKE "%shipping fee%"
+	OR CheapestItem LIKE "%extra fee%"
+	OR CheapestItem LIKE "%Versand unterschied%"
+	OR CheapestItem LIKE "%Price difference%"
+	OR CheapestItem LIKE "%rückerstattung%"
+	OR CheapestItem LIKE "%Reissue link%"
+	OR CheapestItem LIKE "%Expecial link%"
+	OR CheapestItem LIKE "%Zahlung Link%"
 	OR (CheapestItem LIKE "%Versandkosten%" AND CheapestItem NOT LIKE "%Versandkosten frei%" AND CheapestItem NOT LIKE "%versandkostenfrei%")
 	
 
