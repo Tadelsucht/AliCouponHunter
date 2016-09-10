@@ -52,6 +52,7 @@ error_counter = 0
 item_phrases = get_list_from_file(SHOP_SEARCH_ITEM_PHRASES_FILE)
 links_checked = 0
 
+
 ########## DO ##########
 def possible_error_exit():
     if error_counter > STOP_CONSECUTIVELY_ERROR_NUMBER:
@@ -72,25 +73,31 @@ for phrase in item_phrases:
         page += 1
         logging.info("Item phrase: {0} | Page: {1}".format(phrase, page))
 
-        html = requests_session.get(
-            "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&page={1}".format(
-                phrase, page),
-            headers=HEADERS).text
-        current_page_shops = re.findall(ur'(aliexpress.com/store/\d+)"', html)
+        try:
+            html = requests_session.get(
+                "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&page={1}".format(
+                    phrase, page),
+                headers=HEADERS).text
+            current_page_shops = re.findall(ur'(aliexpress.com/store/\d+)"', html)
 
-        if first_page_shops is None:
-            first_page_shops = current_page_shops
-            ignore_equality = True
+            if first_page_shops is None:
+                first_page_shops = current_page_shops
+                ignore_equality = True
 
-        if len(current_page_shops) == 0:
-            logging.error("No search results.")
+            if len(current_page_shops) == 0:
+                logging.error("No search results.")
+                error_counter += 1
+        except:
+            logging.error(str(e))
             error_counter += 1
 
         for url in current_page_shops:
             links_checked += 1
             try:
                 http_url = "http://" + url
-                logging.info("Current URLs: {0}/{1} | Url: {2}".format(current_page_shops.index(url) + 1, len(current_page_shops), http_url))
+                # Todo: Fehler bei gleichen urls, erste wird genommen
+                logging.info("Current URLs: {0}/{1} | Url: {2}".format(current_page_shops.index(url) + 1,
+                                                                       len(current_page_shops), http_url))
                 id = re.match('.*store/(\d+).*', http_url).group(1)
                 if not db.get_is_processed(id):
                     logging.error("Get Coupons.")
@@ -176,4 +183,4 @@ for phrase in item_phrases:
         # Sleep Search
         sleep_to_prevent_ban()
 
-    # Todo: Nachdem ein phrase komplett durchleutet wurde, wird der eintrag aus der datei gelöscht und in die alrady_searched getan
+        # Todo: Nachdem ein phrase komplett durchleutet wurde, wird der eintrag aus der datei gelöscht und in die alrady_searched getan
