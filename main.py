@@ -145,5 +145,5 @@ while bing_search_counter is not maximum_bing_searches:
             logging.error("{1}".format(url, str(e)))
             error_counter += 1
 
-        if error_counter > stop_consecutively_error_number:
-            sys.exit("Stop because to many errors!")
+    if error_counter > stop_consecutively_error_number:
+        sys.exit("Stop because to many errors!")
