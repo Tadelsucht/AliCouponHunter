@@ -16,3 +16,4 @@ differenz
 transaktion
 extraverschiffengebühr
 Produkt ersatz
+fracht
