@@ -87,7 +87,7 @@ for phrase in item_phrases:
             links_checked += 1
             try:
                 http_url = "http://" + url
-                logging.info("Current URLs: {0}/{1} | Url: {2}".format(current_page_shops.index(url), len(current_page_shops), http_url))
+                logging.info("Current URLs: {0}/{1} | Url: {2}".format(current_page_shops.index(url) + 1, len(current_page_shops), http_url))
                 id = re.match('.*store/(\d+).*', http_url).group(1)
                 if not db.get_is_processed(id):
                     logging.error("Get Coupons.")
