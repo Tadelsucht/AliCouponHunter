@@ -20,3 +20,4 @@ Liste von Begriffen Beispiel: "Bluetooth lautsprecher"
 for begriff in liste_von_begriffen
     search_result = seite
     for seiten in search_result
+    
