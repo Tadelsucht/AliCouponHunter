@@ -15,3 +15,8 @@ https://m.{0}.aliexpress.com/search.htm?sortType=PP_A&sellerAdminSeq={1}<br />
 # To Do
 Stückzahl beachten?<br />
 get_is_processed sollte eine processed again eigenschaft haben<br />
+Direkt bei Aliexpress nach Shops suchen.
+Liste von Begriffen Beispiel: "Bluetooth lautsprecher"
+for begriff in liste_von_begriffen
+    search_result = seite
+    for seiten in search_result
