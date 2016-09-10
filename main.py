@@ -76,6 +76,9 @@ for phrase in item_phrases:
             headers=HEADERS).text
         current_page_shops = re.findall(ur'(aliexpress.com/store/\d+)"', html)
 
+        if first_page_shops is None:
+            first_page_shops = current_page_shops
+
         if len(current_page_shops) == 0:
             logging.error("No search results.")
             error_counter += 1

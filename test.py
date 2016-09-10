@@ -47,6 +47,9 @@ for phrase in item_phrases:
         html = requests_session.get("http://aliexpress.com/wholesale?SearchText={1}&SortType=price_asc&page={2}".format(LANGUAGE_SUBDOMAIN, phrase, page), headers=HEADERS).text
         current_page_shops = re.findall(ur'(aliexpress.com/store/\d+)"',html)
         for url in current_page_shops:
+            if first_page_shops is None:
+                first_page_shops = current_page_shops
+
             pass
             #print url
 
