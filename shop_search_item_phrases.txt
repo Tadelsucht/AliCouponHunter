@@ -1,10 +1,1 @@
 gadget
-unicorn
-bluetooth
-smartwatch
-smartphone
-bluetooth speaker
-lego
-LEPIN
-uhr
-arduino
