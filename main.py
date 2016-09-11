@@ -200,5 +200,5 @@ for phrase in item_phrases:
         f.writelines(item_phrases[1:])
     already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
     already_searched_shop_search_item_phrases.append(item_phrases[0])
-    with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
+    with io.open(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
         f.writelines(already_searched_shop_search_item_phrases)
