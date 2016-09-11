@@ -1,3 +1,5 @@
+# coding: utf8
+import logging
 from datetime import datetime
 from Database.Database import Database
 
@@ -9,7 +11,8 @@ class Processed(Database):
         self._cursor.execute(
             u"INSERT INTO {0} (ID, Shop, Keywords, URL, Discount, MinimumPurchase, BestCouponDifference, CheapestItem, CheapestItemPrice, AddedOrUpdated) VALUES (?,?,?,?,?,?,?,?,?,?);".format(
                 self._database_name),
-            (id, shop, keywords, url, discount, minimum_purchase, bcd, cheapest_item, cheapest_item_price, datetime.now()))
+            (id, shop, keywords, url, discount, minimum_purchase, bcd, cheapest_item, cheapest_item_price,
+             datetime.now()))
         self._connection.commit()
 
     def get_is_processed(self, url):
@@ -17,3 +20,14 @@ class Processed(Database):
         if self._cursor.fetchone()[0] == 0:
             return False
         return True
+
+    def remove_entries_with_forbidden_phrases(self, forbidden_item_phrases):
+        query = u''' FROM {0} WHERE '''.format(self._database_name)
+        if len(forbidden_item_phrases) is 0:
+            return
+        for phrase in forbidden_item_phrases:
+            query += u' CheapestItem LIKE "%{0}%" OR'.format(phrase)
+        query = query[:-2]
+        self._cursor.execute(u"SELECT COUNT(*) " + query)
+        logging.info(u"Number of deleted forbidden entries: {0}".format(self._cursor.fetchone()[0]))
+        self._cursor.execute(u"DELETE " + query)
