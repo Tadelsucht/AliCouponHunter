@@ -31,3 +31,7 @@ class Processed(Database):
         self._cursor.execute(u"SELECT COUNT(*) " + query)
         logging.info(u"Number of deleted forbidden entries: {0}".format(self._cursor.fetchone()[0]))
         self._cursor.execute(u"DELETE " + query)
+
+    def get_number_of_shops(self):
+        self._cursor.execute(u"SELECT COUNT(*) FROM {0}".format(self._database_name))
+        return self._cursor.fetchone()[0]

@@ -19,9 +19,11 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/201
            "Accept-Language": "de",
            'Accept-Encoding': 'deflate'}
 SHOP_SEARCH_ITEM_PHRASES_FILE = "shop_search_item_phrases.txt"
+ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE = "already_searched_shop_search_item_phrases.txt"
 FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
-MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 2000
+MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
+NO_SEARCH_RESULTS_COUNTER_MAX = 10
 
 
 ########## Functions ##########
@@ -54,6 +56,7 @@ db.remove_entries_with_forbidden_phrases(FORBIDDEN_ITEMS_PHRASES)
 jar = requests.cookies.RequestsCookieJar()
 requests_session = requests.Session()
 requests_session.headers = HEADERS
+no_search_results_counter = 0
 error_counter = 0
 item_phrases = get_list_from_file(SHOP_SEARCH_ITEM_PHRASES_FILE)
 links_checked = 0
@@ -65,6 +68,7 @@ def possible_error_exit():
 
 
 # TODO: Start Info. Wie viele sind in der Datenbank?
+logging.info("Database Info | Already scanned: {0}".format(db.get_number_of_shops()))
 for phrase in item_phrases:
     logging.info(
         "Links checked: {0} | Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
@@ -78,7 +82,7 @@ for phrase in item_phrases:
 
         try:
             url = SHOP_SEARCH_URL.format(phrase, page)
-            logging.info("Item phrase: {0} | Page: {1} | Already scanned in a row: {2} | URL: {3}".format(phrase, page, already_scanned_in_a_row, url))
+            logging.info("Links checked: {0} | Item phrase: {0} | Page: {1} | Already scanned in a row: {2} | URL: {3}".format(links_checked, phrase, page, already_scanned_in_a_row, url))
             html = requests_session.get(
                 url,
                 headers=HEADERS).text
@@ -86,7 +90,11 @@ for phrase in item_phrases:
 
             if len(shops) == 0:
                 logging.error("No search results.")
-                error_counter += 1
+                no_search_results_counter += 1
+                if no_search_results_counter > NO_SEARCH_RESULTS_COUNTER_MAX:
+                    continue
+            else:
+                no_search_results_counter = 0
         except:
             logging.error(str(e))
             error_counter += 1
@@ -187,4 +195,10 @@ for phrase in item_phrases:
         # Sleep Search
         sleep_to_prevent_ban()
 
-        # Todo: Nachdem ein phrase komplett durchleutet wurde, wird der eintrag aus der datei gelöscht und in die alrady_searched getan
+    # Move for item_phrases to already searched
+    with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
+        f.writelines(item_phrases[1:])
+    already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
+    already_searched_shop_search_item_phrases.append(item_phrases[0])
+    with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
+        f.writelines(already_searched_shop_search_item_phrases)
