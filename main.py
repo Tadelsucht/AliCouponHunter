@@ -82,7 +82,7 @@ for phrase in item_phrases:
 
         try:
             url = SHOP_SEARCH_URL.format(phrase, page)
-            logging.info("Links checked: {0} | Item phrase: {0} | Page: {1} | Already scanned in a row: {2} | URL: {3}".format(links_checked, phrase, page, already_scanned_in_a_row, url))
+            logging.info("Links checked: {0} | Item phrase: {1} | Page: {2} | Already scanned in a row: {3} | URL: {4}".format(links_checked, phrase, page, already_scanned_in_a_row, url))
             html = requests_session.get(
                 url,
                 headers=HEADERS).text
