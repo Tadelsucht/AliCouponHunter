@@ -15,7 +15,7 @@ class Processed(Database):
              datetime.now()))
         self._connection.commit()
 
-    def get_is_processed(self, url):
+    def is_saved(self, url):
         self._cursor.execute("SELECT COUNT(*) FROM {0} WHERE ID = ?".format(self._database_name), [url])
         if self._cursor.fetchone()[0] == 0:
             return False
@@ -35,3 +35,9 @@ class Processed(Database):
     def get_number_of_shops(self):
         self._cursor.execute(u"SELECT COUNT(*) FROM {0}".format(self._database_name))
         return self._cursor.fetchone()[0]
+
+
+    # TODO
+    # def delete_if_older_as_datetime(self, id, days):
+    #    print [datetime]
+    #    self._cursor.execute("DELETE FROM {0} WHERE ID = ? AND AddedOrUpdated <= date('now','-{1} day')".format(self._database_name, days), (id))

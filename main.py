@@ -4,11 +4,11 @@ import logging
 import random
 import re
 import io
+from datetime import datetime, timedelta
 import requests
 import time
 import sys
 from BeautifulSoup import BeautifulSoup
-from py_bing_search import PyBingWebSearch
 from Database.Table.Processed import Processed
 
 ########## Config ##########
@@ -24,6 +24,7 @@ FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
+#EXPIRED_AFTER_DAYS = 1
 
 
 ########## Functions ##########
@@ -45,8 +46,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 ########## Variables ##########
-SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=default&page={1}"
-MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&sellerAdminSeq={0}"
+SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&page={1}"
+MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 FORBIDDEN_ITEMS_PHRASES = get_list_from_file(FORBIDDEN_ITEMS_PHRASES_FILE)
 
 ########## Init ##########
@@ -61,6 +62,7 @@ error_counter = 0
 item_phrases = get_list_from_file(SHOP_SEARCH_ITEM_PHRASES_FILE)
 links_checked = 0
 
+
 ########## DO ##########
 def possible_error_exit():
     if error_counter > STOP_CONSECUTIVELY_ERROR_NUMBER:
@@ -71,7 +73,7 @@ def possible_error_exit():
 logging.info("Database Info | Already scanned: {0}".format(db.get_number_of_shops()))
 for phrase in item_phrases:
     logging.info(
-        "Links checked: {0} | Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
+        "Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
 
     already_scanned_in_a_row = 0
     page = 0
@@ -82,7 +84,9 @@ for phrase in item_phrases:
 
         try:
             url = SHOP_SEARCH_URL.format(phrase, page)
-            logging.info("Links checked: {0} | Item phrase: {1} | Page: {2} | Already scanned in a row: {3} | URL: {4}".format(links_checked, phrase, page, already_scanned_in_a_row, url))
+            logging.info(
+                "Links checked: {0} | Item phrase: {1} | Page: {2} | Already scanned in a row: {3} | URL: {4}".format(
+                    links_checked, phrase, page, already_scanned_in_a_row, url))
             html = requests_session.get(
                 url,
                 headers=HEADERS).text
@@ -107,7 +111,8 @@ for phrase in item_phrases:
                 logging.info("Current URLs: {0}/{1} | Url: {2}".format(links_checked - links_checked_before,
                                                                        len(shops), http_shop_url))
                 id = re.match('.*store/(\d+).*', http_shop_url).group(1)
-                if not db.get_is_processed(id):
+                #db.delete_if_older_as_datetime(id, EXPIRED_AFTER_DAYS)
+                if not db.is_saved(id):
                     logging.error("Get Coupons.")
                     html = requests_session.get(http_shop_url, headers=HEADERS).text
                     soup = BeautifulSoup(html)
@@ -202,3 +207,4 @@ for phrase in item_phrases:
     already_searched_shop_search_item_phrases.append(item_phrases[0])
     with io.open(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
         f.writelines(already_searched_shop_search_item_phrases)
+logging.info("Scannend all words. Script stop.")

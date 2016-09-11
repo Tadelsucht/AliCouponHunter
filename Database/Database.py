@@ -8,7 +8,7 @@ class Database:
     _sql_table = u'''TABLE DEFINITION'''
 
     def __init__(self, database_file, database_name):
-        self._connection = sqlite3.connect(database_file)
+        self._connection = sqlite3.connect(database_file, detect_types=sqlite3.PARSE_DECLTYPES)
         self._database_name = database_name
         self._cursor = self._connection.cursor()
         self._cursor.execute(u'''SELECT name FROM sqlite_master
