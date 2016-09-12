@@ -1,9 +1,1 @@
-smartwatch
-smartphone
-bluetooth speaker
-bluetooth
-LEPIN
-uhr
-arduino
-gadget
-unicorn
+smartphonebluetooth speakerbluetoothLEPINuhrarduinogadgetunicorn
