@@ -14,5 +14,4 @@ https://m.{0}.aliexpress.com/search.htm?sortType=PP_A&sellerAdminSeq={1}<br />
 
 # ToDo
 Stückzahl beachten?<br />
-get_is_processed sollte eine processed again eigenschaft haben<br />
 Bei shops wie https://de.aliexpress.com/store/1463054 erst nach "off US $100" gucken dann das nächst darüber gelegende "US $10"<br />

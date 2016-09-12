@@ -24,7 +24,10 @@ FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
-#EXPIRED_AFTER_DAYS = 1
+EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-12 11:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
+EXPIRED_ONLY_WITH_COUPON = True
+SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&page={1}"
+MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 
 
 ########## Functions ##########
@@ -46,8 +49,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 ########## Variables ##########
-SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&page={1}"
-MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 FORBIDDEN_ITEMS_PHRASES = get_list_from_file(FORBIDDEN_ITEMS_PHRASES_FILE)
 
 ########## Init ##########
@@ -57,7 +58,6 @@ db.remove_entries_with_forbidden_phrases(FORBIDDEN_ITEMS_PHRASES)
 jar = requests.cookies.RequestsCookieJar()
 requests_session = requests.Session()
 requests_session.headers = HEADERS
-no_search_results_counter = 0
 error_counter = 0
 item_phrases = get_list_from_file(SHOP_SEARCH_ITEM_PHRASES_FILE)
 links_checked = 0
@@ -75,6 +75,7 @@ for phrase in item_phrases:
     logging.info(
         "Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
 
+    no_search_results_counter = 0
     already_scanned_in_a_row = 0
     page = 0
     shops = []
@@ -111,7 +112,8 @@ for phrase in item_phrases:
                 logging.info("Current URLs: {0}/{1} | Url: {2}".format(links_checked - links_checked_before,
                                                                        len(shops), http_shop_url))
                 id = re.match('.*store/(\d+).*', http_shop_url).group(1)
-                #db.delete_if_older_as_datetime(id, EXPIRED_AFTER_DAYS)
+                if db.delete_if_older_as_datetime(id, EXPIRED_BEFORE_EQUAL_DATETIME, EXPIRED_ONLY_WITH_COUPON):
+                    logging.info("Shop already scanned. But scan was expired.")
                 if not db.is_saved(id):
                     logging.error("Get Coupons.")
                     html = requests_session.get(http_shop_url, headers=HEADERS).text
@@ -163,8 +165,6 @@ for phrase in item_phrases:
                                 cheapest_item = item_name
                                 cheapest_item_price = item_price
 
-                    # TODO: Versandkosten aufzeichnen btw. yes and no
-
                     # Save
                     db.save(id, shop, keywords, http_shop_url, best_discount, best_minimum_purchase,
                             best_coupon_difference,
@@ -188,7 +188,7 @@ for phrase in item_phrases:
                     logging.info("Already scanned.")
                     already_scanned_in_a_row += 1
             except Exception as e:
-                logging.error("{1}".format(http_shop_url, str(e)))
+                logging.error("{0}".format(sys.exc_info()))
                 error_counter += 1
 
                 # Error exit

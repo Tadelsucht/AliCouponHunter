@@ -52,3 +52,11 @@ Refund the difference
 resend
 Shipping cost
 shipping link
+DHL EMS Fee
+Price adjustment
+additional transportation
+difference link
+shipping charge
+charge extra only
+Prcie Difference
+Additional Fee

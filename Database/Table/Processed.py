@@ -36,8 +36,19 @@ class Processed(Database):
         self._cursor.execute(u"SELECT COUNT(*) FROM {0}".format(self._database_name))
         return self._cursor.fetchone()[0]
 
+    def delete_if_older_as_datetime(self, id, datetime_obj, has_coupon):
+        return_value = False
 
-    # TODO
-    # def delete_if_older_as_datetime(self, id, days):
-    #    print [datetime]
-    #    self._cursor.execute("DELETE FROM {0} WHERE ID = ? AND AddedOrUpdated <= date('now','-{1} day')".format(self._database_name, days), (id))
+        query = " FROM {0} WHERE ID = ? AND AddedOrUpdated <= date(?) ".format(self._database_name)
+        if has_coupon:
+            query += " AND Discount IS NOT NULL "
+
+        self._cursor.execute("SELECT COUNT(*) " + query, (id, str(datetime_obj)))
+        if self._cursor.fetchone()[0] != 0:
+            return_value = True
+
+        self._cursor.execute(
+            "DELETE " + query,
+            (id, str(datetime_obj)))
+
+        return return_value
