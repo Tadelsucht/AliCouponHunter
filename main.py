@@ -106,8 +106,7 @@ for phrase in item_phrases:
         links_checked_before = links_checked
         for shop_url in shops:
             links_checked += 1
-            #try:
-            if True:
+            try:
                 http_shop_url = "http://" + shop_url
                 logging.info("Current URLs: {0}/{1} | Url: {2}".format(links_checked - links_checked_before,
                                                                        len(shops), http_shop_url))
@@ -193,14 +192,12 @@ for phrase in item_phrases:
                 else:
                     logging.info("Already scanned.")
                     already_scanned_in_a_row += 1
-            '''
             except Exception as e:
                 logging.error("{0}".format(sys.exc_info()))
                 error_counter += 1
 
                 # Error exit
                 possible_error_exit()
-            '''
 
         # Error exit
         possible_error_exit()
