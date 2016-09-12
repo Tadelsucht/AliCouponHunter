@@ -1,4 +1,5 @@
 smartphone
+cute
 bluetooth speaker
 bluetooth
 LEPIN
@@ -6,3 +7,7 @@ uhr
 arduino
 gadget
 unicorn
+tablet
+tft
+android
+usb
