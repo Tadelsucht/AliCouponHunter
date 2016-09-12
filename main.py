@@ -96,7 +96,7 @@ for phrase in item_phrases:
                 logging.error("No search results.")
                 no_search_results_counter += 1
                 if no_search_results_counter > NO_SEARCH_RESULTS_COUNTER_MAX:
-                    continue
+                    break
             else:
                 no_search_results_counter = 0
         except:
@@ -202,9 +202,11 @@ for phrase in item_phrases:
 
     # Move for item_phrases to already searched
     with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
-        f.writelines(item_phrases[1:])
+        for phrase in item_phrases[1:]:
+            f.write(phrase + "\r\n")
     already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
     already_searched_shop_search_item_phrases.append(item_phrases[0])
     with io.open(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
-        f.writelines(already_searched_shop_search_item_phrases)
+        for phrase in already_searched_shop_search_item_phrases:
+            f.write(phrase + "\r\n")
 logging.info("Scannend all words. Script stop.")
