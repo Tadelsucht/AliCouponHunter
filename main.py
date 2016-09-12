@@ -53,7 +53,7 @@ FORBIDDEN_ITEMS_PHRASES = get_list_from_file(FORBIDDEN_ITEMS_PHRASES_FILE)
 
 ########## Init ##########
 db = Processed(DB_FILE, "processed")
-db.remove_entries_with_forbidden_phrases(FORBIDDEN_ITEMS_PHRASES)
+db.remove_entries_with_forbidden_phrases([p.replace('*', '%') for p in FORBIDDEN_ITEMS_PHRASES])
 
 jar = requests.cookies.RequestsCookieJar()
 requests_session = requests.Session()
@@ -158,7 +158,7 @@ for phrase in item_phrases:
                         if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                             item_price = float(item[4].encode("ascii", "ignore"))
                         if cheapest_item_price is None or item_price < cheapest_item_price:
-                            if any(word.lower() in item_name.lower() for word in FORBIDDEN_ITEMS_PHRASES):
+                            if any(bool(re.search(word.lower(), item_name.lower())) for word in FORBIDDEN_ITEMS_PHRASES):
                                 logging.info("Filtered phrase was found.")
                             else:
                                 cheapest_item = item_name

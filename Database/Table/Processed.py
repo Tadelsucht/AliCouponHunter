@@ -26,7 +26,7 @@ class Processed(Database):
         if len(forbidden_item_phrases) is 0:
             return
         for phrase in forbidden_item_phrases:
-            query += u' CheapestItem LIKE "%{0}%" OR'.format(phrase)
+            query += u' CheapestItem LIKE "{0}" OR'.format(phrase)
         query = query[:-2]
         self._cursor.execute(u"SELECT COUNT(*) " + query)
         logging.info(u"Number of deleted forbidden entries: {0}".format(self._cursor.fetchone()[0]))

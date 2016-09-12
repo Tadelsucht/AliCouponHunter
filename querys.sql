@@ -14,6 +14,10 @@ WHERE Discount IS NOT NULL
 ORDER BY (CheapestItemPrice - Discount)  ASC
 
 
+SELECT ID, Shop, Keywords, URL, Discount, MinimumPurchase, CheapestItem, CheapestItemPrice
+FROM processed 
+WHERE Discount IS NOT NULL 
+ORDER BY CheapestItemPrice ASC
 
 
 SELECT 
