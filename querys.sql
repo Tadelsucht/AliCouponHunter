@@ -5,8 +5,6 @@ WHERE Discount IS NOT NULL
 ORDER BY Discount DESC, CheapestItemPrice ASC
 
 
-
-
 SELECT (CheapestItemPrice - Discount) AS 'Price', MinimumPurchase, CheapestItem, Keywords, Shop, URL, ID AS 'Price' 
 FROM processed 
 WHERE Discount IS NOT NULL 

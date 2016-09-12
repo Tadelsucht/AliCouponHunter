@@ -106,7 +106,8 @@ for phrase in item_phrases:
         links_checked_before = links_checked
         for shop_url in shops:
             links_checked += 1
-            try:
+            #try:
+            if True:
                 http_shop_url = "http://" + shop_url
                 logging.info("Current URLs: {0}/{1} | Url: {2}".format(links_checked - links_checked_before,
                                                                        len(shops), http_shop_url))
@@ -150,7 +151,7 @@ for phrase in item_phrases:
                     cheapest_item = None
                     cheapest_item_price = None
                     items = re.findall(
-                        ur'subject":"([\w\s ÄÖÜäöüß\!]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
+                        ur'subject":"([\w\s ÄÖÜäöüß\!\.\,]+)((?!subject).)*promoMaxAmount":{"value":([\d\.]+)((?!promoMaxAmount).)*minAmount":{"value":([\d\.]+)',
                         mobile_html)
                     for item in items:
                         item_name = item[0]
@@ -158,8 +159,14 @@ for phrase in item_phrases:
                         if item_price == 0.01:  # Default promo is 0.01, use other value for this case
                             item_price = float(item[4].encode("ascii", "ignore"))
                         if cheapest_item_price is None or item_price < cheapest_item_price:
-                            if any(bool(re.search(word.lower(), item_name.lower())) for word in FORBIDDEN_ITEMS_PHRASES):
-                                logging.info("Filtered phrase was found.")
+                            forbidden_phrase = None
+                            for word in FORBIDDEN_ITEMS_PHRASES:
+                                if re.search(("^" + word.lower() + "$").replace("*", ".*"), item_name.lower()) is not None:
+                                    forbidden_phrase = word
+                                    break
+
+                            if forbidden_phrase is not None:
+                                logging.info("Following filtered phrase was found: {0}".format(forbidden_phrase))
                             else:
                                 cheapest_item = item_name
                                 cheapest_item_price = item_price
@@ -186,12 +193,14 @@ for phrase in item_phrases:
                 else:
                     logging.info("Already scanned.")
                     already_scanned_in_a_row += 1
+            '''
             except Exception as e:
                 logging.error("{0}".format(sys.exc_info()))
                 error_counter += 1
 
                 # Error exit
                 possible_error_exit()
+            '''
 
         # Error exit
         possible_error_exit()
