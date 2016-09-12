@@ -13,8 +13,8 @@ from Database.Table.Processed import Processed
 
 ########## Config ##########
 STOP_CONSECUTIVELY_ERROR_NUMBER = 10
-SLEEP_TIME = 6
-SLEEP_TIME_PLUS_MINUS = 3
+SLEEP_TIME = 4
+SLEEP_TIME_PLUS_MINUS = 1
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            "Accept-Language": "de",
            'Accept-Encoding': 'deflate'}
@@ -69,7 +69,6 @@ def possible_error_exit():
         sys.exit("Stop because to many errors!")
 
 
-# TODO: Start Info. Wie viele sind in der Datenbank?
 logging.info("Database Info | Already scanned: {0}".format(db.get_number_of_shops()))
 for phrase in item_phrases:
     logging.info(
