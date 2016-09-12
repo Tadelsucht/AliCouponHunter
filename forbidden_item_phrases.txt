@@ -51,3 +51,4 @@ Fright Cost
 Refund the difference
 resend
 Shipping cost
+shipping link

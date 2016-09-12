@@ -46,7 +46,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s| %(message)s')
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 ########## Variables ##########
-SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&page={1}"
+SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&page={1}"
 MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 FORBIDDEN_ITEMS_PHRASES = get_list_from_file(FORBIDDEN_ITEMS_PHRASES_FILE)
 
