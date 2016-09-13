@@ -26,7 +26,7 @@ MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
 EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-12 17:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
 EXPIRED_ONLY_WITH_COUPON = False
-SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&page={1}"
+SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&isRtl=yes&page={1}"
 MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 
 
