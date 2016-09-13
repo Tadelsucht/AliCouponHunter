@@ -100,7 +100,7 @@ for item_phrase in item_phrases:
             else:
                 no_search_results_counter = 0
         except:
-            logging.error(str(e))
+            logging.error("{0}".format(sys.exc_info()))
             error_counter += 1
 
         links_checked_before = links_checked
@@ -192,7 +192,7 @@ for item_phrase in item_phrases:
                 else:
                     logging.info("Already scanned.")
                     already_scanned_in_a_row += 1
-            except Exception as e:
+            except Exception:
                 logging.error("{0}".format(sys.exc_info()))
                 error_counter += 1
 
