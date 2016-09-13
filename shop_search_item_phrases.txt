@@ -1,4 +1,3 @@
-uhr
 arduino
 tablet
 tft
