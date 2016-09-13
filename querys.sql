@@ -31,7 +31,5 @@ SELECT
 	)
 	* 100 AS 'Percent of shops with coupons';
 
-	
-	
 
 DELETE FROM processed WHERE ID = 1382496

@@ -1,15 +1,14 @@
 lego
 smartwatch
 cute
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
-uhr
+arduino
+tablet
+tft
+android
+usb
+gadget
+unicorn
+smartphone
+bluetooth speaker
+bluetooth
+LEPIN

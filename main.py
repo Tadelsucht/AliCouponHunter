@@ -24,8 +24,8 @@ FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
-EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-12 11:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
-EXPIRED_ONLY_WITH_COUPON = True
+EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-12 17:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
+EXPIRED_ONLY_WITH_COUPON = False
 SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&page={1}"
 MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 
@@ -70,9 +70,9 @@ def possible_error_exit():
 
 
 logging.info("Database Info | Already scanned: {0}".format(db.get_number_of_shops()))
-for phrase in item_phrases:
+for item_phrase in item_phrases:
     logging.info(
-        "Words: {1}/{2}".format(links_checked, item_phrases.index(phrase) + 1, len(item_phrases)))
+        "Words: {1}/{2}".format(links_checked, item_phrases.index(item_phrase) + 1, len(item_phrases)))
 
     no_search_results_counter = 0
     already_scanned_in_a_row = 0
@@ -83,10 +83,10 @@ for phrase in item_phrases:
         page += 1
 
         try:
-            url = SHOP_SEARCH_URL.format(phrase, page)
+            url = SHOP_SEARCH_URL.format(item_phrase, page)
             logging.info(
                 "Links checked: {0} | Item phrase: {1} | Page: {2} | Already scanned in a row: {3} | URL: {4}".format(
-                    links_checked, phrase, page, already_scanned_in_a_row, url))
+                    links_checked, item_phrase, page, already_scanned_in_a_row, url))
             html = requests_session.get(
                 url,
                 headers=HEADERS).text
@@ -207,7 +207,7 @@ for phrase in item_phrases:
 
     # Move for item_phrases to already searched
     with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
-        for phrase in item_phrases[1:]:
+        for phrase in item_phrases[item_phrases.index(item_phrase)+1:]:
             f.write(phrase + "\r\n")
     already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
     already_searched_shop_search_item_phrases.append(item_phrases[0])
