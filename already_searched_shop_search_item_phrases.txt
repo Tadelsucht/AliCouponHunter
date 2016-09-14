@@ -31,3 +31,12 @@ game
 toy
 toy
 toy
+ring
+ring
+ring
+ring
+ring
+ring
+ring
+ring
+ring
