@@ -5,7 +5,7 @@ WHERE Discount IS NOT NULL
 ORDER BY Discount DESC, CheapestItemPrice ASC
 
 
-SELECT (CheapestItemPrice - Discount) AS 'Price', MinimumPurchase, CheapestItem, Keywords, Shop, URL, ID AS 'Price' 
+SELECT (CheapestItemPrice - Discount) AS 'Discount price', CheapestItemPrice AS 'Price', MinimumPurchase, CheapestItem, Keywords, Shop, URL, ID AS 'Price' 
 FROM processed 
 WHERE Discount IS NOT NULL 
 	AND  BestCouponDifference < 1
