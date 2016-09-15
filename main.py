@@ -24,8 +24,8 @@ FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
-EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-12 17:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
-EXPIRED_ONLY_WITH_COUPON = False
+EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-14 20:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
+EXPIRED_ONLY_WITH_COUPON = True
 SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&isRtl=yes&page={1}"
 MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
 
@@ -210,7 +210,7 @@ for item_phrase in item_phrases:
         for phrase in item_phrases[item_phrases.index(item_phrase)+1:]:
             f.write(phrase + "\r\n")
     already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
-    already_searched_shop_search_item_phrases.append(item_phrases[0])
+    already_searched_shop_search_item_phrases.append(item_phrases[item_phrases.index(item_phrase)+1:][0])
     with io.open(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
         for phrase in already_searched_shop_search_item_phrases:
             f.write(phrase + "\r\n")

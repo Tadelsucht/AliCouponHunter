@@ -1,4 +1,3 @@
-lego
 smartwatch
 cute
 arduino
@@ -11,18 +10,3 @@ unicorn
 smartphone
 bluetooth speaker
 bluetooth
-LEPIN
-alpaca
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
-powerbank
