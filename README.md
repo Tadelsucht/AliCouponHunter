@@ -1,4 +1,6 @@
 # AliCouponHunter
+Aliexpress coupon search | Find cheapest and show possible coupon freebies.
+
 ## Run
 ```sh
 python2.7 main.py
