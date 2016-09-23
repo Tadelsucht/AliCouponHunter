@@ -1,5 +1,5 @@
 # AliCouponHunter
-Aliexpress coupon search | Find cheapest and show possible coupon freebies.
+Aliexpress coupon search | Find cheapest item and show possible coupon freebies.
 
 ## Run
 ```sh
