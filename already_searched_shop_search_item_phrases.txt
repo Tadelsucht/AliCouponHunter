@@ -1,4 +1,3 @@
-cute
 funny
 germany
 arduino
