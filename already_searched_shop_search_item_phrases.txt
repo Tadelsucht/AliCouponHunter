@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 funny
 germany
 arduino
@@ -43,3 +44,5 @@ hut
 light
 audio
 halskette
+=======
+>>>>>>> d24cd905137b9b58bbe1ba5d79c6c7ae609ec280
