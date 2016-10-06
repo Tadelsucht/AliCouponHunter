@@ -9,6 +9,7 @@ SELECT (CheapestItemPrice - Discount) AS 'Price', MinimumPurchase, CheapestItem,
 FROM processed 
 WHERE Discount IS NOT NULL 
 	AND  BestCouponDifference < 1
+	AND Price NOT NULL
 ORDER BY (CheapestItemPrice - Discount)  ASC
 
 
