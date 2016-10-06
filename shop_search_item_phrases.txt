@@ -1,4 +1,3 @@
-
 funny
 germany
 arduino
@@ -44,26 +43,6 @@ hut
 light
 audio
 halskette
-Buyer Protection
-Customer Service
-Disputes & Reports
-Sign in
-Join
-Sign Out
-Sign in
-Join Free
-My AliExpress
-My Orders
-Message Center
-Wish List
-My Favorite Stores
-My Coupons
-SuperDeals
-Featured Brands
-AliExpress Collections
-Bestselling
-Tech Discovery
-Trending Styles
 Phones & Accessories
 Computer & Office
 Consumer Electronics
@@ -78,24 +57,6 @@ Sports & Outdoors
 Health & Beauty
 Automobiles & Motorcycles
 Home Improvement
-Try Your Luck
-Download the app
-Making Payments
-Delivery Options
-Buyer Protection
-New User Guide
-Customer Service
-Transaction Service Agreement
-Take Our Survey
-Organization & Technical Support
-Partnerships
-Affiliate Program
-Customer Service
-Disputes & Reports
-Making Payment
-Delivery Options
-Buyer Protection
-New User Guide
 Russian
 Portuguese
 Spanish
@@ -119,14 +80,6 @@ Great Value
 Retail
 Reviews
 China Brands
-Alibaba Group Website
-AliExpress
-Alimama
-Alipay
-AliTravel
-Alibaba Cloud
-Alibaba International
-Ali Telecom
 Ding Talk
 Juhuasuan
 LaiWang
@@ -140,22 +93,7 @@ App Store
 Kundenservice
 Streitigkeiten
 mobile
-Anmelden
-Kostenlos anmelden
-Abmelden
-Anmelden
-Kostenlos anmelden
-Mein AliExpress
-Meine Bestellungen
-Mitteilungszentrale
-Wunschliste
-Meine Lieblingsshops
-Mein Gutschein
-Super Deals
-Empfohlene Mrken
-AE Kollektion
 Bestseller
-Tech Entdeckungen
 Im Trend
 Grund Jacken
 Leder und Wildleder
@@ -437,21 +375,6 @@ Badezimmerarmaturen
 Bad Hardware
 Bad Eitelkeiten
 Badewannen und Whirlpools
-Making Payments
-Delivery Options
-Buyer Protection
-Customer Service
-Transaction Service Agreement
-Take Our Survey
-Organization & Technical Support
-Partnerships
-Affiliate Program
-Customer Service
-Disputes & Reports
-Making Payment
-Delivery Options
-Buyer Protection
-New User Guide
 Portuguese
 Spanish
 French
