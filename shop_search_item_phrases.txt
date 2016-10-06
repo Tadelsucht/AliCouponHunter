@@ -43,19 +43,27 @@ hut
 light
 audio
 halskette
-Phones & Accessories
-Computer & Office
-Consumer Electronics
+Phones
+Accessories
+Computer
+Office
+Consumer
+Electronics
 Jewelry
 Watches
-Home & Garden
+Home
+Garden
 Bags
 Shoes
 Toys
-Kids & Baby
-Sports & Outdoors
-Health & Beauty
-Automobiles & Motorcycles
+Kids
+Baby
+Sports
+Outdoors
+Health
+Beauty
+Automobiles
+Motorcycles
 Home Improvement
 Russian
 Portuguese
@@ -83,7 +91,8 @@ China Brands
 Ding Talk
 Juhuasuan
 LaiWang
-Taobao Markertplace
+Taobao
+Markertplace
 Tmall
 Xiami
 YUN OS
@@ -95,8 +104,8 @@ Streitigkeiten
 mobile
 Bestseller
 Im Trend
-Grund Jacken
-Leder und Wildleder
+Leder
+Wildleder
 Graben
 T-Shirts
 Camis
@@ -124,7 +133,6 @@ T-Shirts
 Daunenjacken
 Jacken
 Parkas
-Leder und Wildleder
 Graben
 Shirts
 Casual Shirts
@@ -144,15 +152,20 @@ Schlaf Bottoms
 Adapter
 Armbinden
 Telefone
-Kommunikation Kabel
-Fixed Wireless Terminals
+Kommunikation
+Kabel
+Fixed
+Wireless
+Terminals
 Telecom Teile
-Handy Teile
+Handy
+Teile
 Handy Linsen
 Handy lcds
 Handy Touch Panel
 Schaltungen
-Kamera Module
+Kamera
+Module
 DIY Computer
 DIY All-In-One
 DIY Desktop
