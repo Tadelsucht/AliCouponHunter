@@ -35,8 +35,7 @@ music
 sd
 card
 lego
-orange
-pi
+orange pi
 pokemon
 cat
 Handheld
@@ -385,3 +384,13 @@ Badezimmerarmaturen
 Eitelkeiten
 Badewannen
 Whirlpool
+blue
+red
+yellow
+green
+grey
+black
+white
+pink
+brown
+orange
