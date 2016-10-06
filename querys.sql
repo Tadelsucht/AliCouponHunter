@@ -2,7 +2,7 @@ SELECT ID, Shop, Keywords, URL, Discount, MinimumPurchase, CheapestItem, Cheapes
 FROM processed 
 WHERE Discount IS NOT NULL 
 	AND BestCouponDifference < 1
-	AND Price NOT NULL
+	AND CheapestItemPrice IS NOT NULL
 ORDER BY Discount DESC, CheapestItemPrice ASC
 
 
@@ -10,7 +10,7 @@ SELECT (CheapestItemPrice - Discount) AS 'Price', MinimumPurchase, CheapestItem,
 FROM processed 
 WHERE Discount IS NOT NULL 
 	AND  BestCouponDifference < 1
-	AND Price NOT NULL
+	AND Price IS NOT NULL
 ORDER BY (CheapestItemPrice - Discount)  ASC
 
 
