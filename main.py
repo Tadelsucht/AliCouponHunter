@@ -19,7 +19,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/201
            "Accept-Language": "de",
            'Accept-Encoding': 'deflate'}
 SHOP_SEARCH_ITEM_PHRASES_FILE = "shop_search_item_phrases.txt"
-ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE = "already_searched_shop_search_item_phrases.txt"
+#ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE = "already_searched_shop_search_item_phrases.txt"
 FORBIDDEN_ITEMS_PHRASES_FILE = 'forbidden_item_phrases.txt'
 DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
