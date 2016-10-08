@@ -1,4 +1,4 @@
-*Zusätzlich*
+﻿*Zusätzlich*
 *Gebühr*
 *preis unterschied*
 *Preisunterschied*
@@ -134,3 +134,7 @@ Attention
 Spread
 China Post
 Addition Fee
+custom MadeShopping Service
+after
+DHL,UPS,EMS,E
+Postage Fees
