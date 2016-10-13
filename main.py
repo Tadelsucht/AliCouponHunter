@@ -93,7 +93,7 @@ for item_phrase in item_phrases:
                 headers=HEADERS).text
             shops = re.findall(ur'(aliexpress.com/store/\d+)"', html)
 
-            if len(shops) == 0:
+            if len(shops) < 48:
                 logging.error("No search results.")
                 no_search_results_counter += 1
                 if no_search_results_counter > NO_SEARCH_RESULTS_COUNTER_MAX:
