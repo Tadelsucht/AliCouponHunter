@@ -738,7 +738,7 @@ manicure
 pedicure
 natural
 alternative
-remedies
+remedie
 oral
 salon
 spa
@@ -754,7 +754,7 @@ food
 beverages
 fresh
 cut
-flowers
+flower
 greeting
 party
 household
@@ -769,7 +769,7 @@ fans
 major
 appliances
 window
-treatments
+treatment
 yard
 living
 engagement
@@ -779,7 +779,7 @@ fashion
 fine
 artisan
 boxes
-organizers
+organizer
 design
 repair
 loose
@@ -812,7 +812,7 @@ poultry
 bird
 dog
 fish
-aquariums
+aquarium
 horse
 reptile
 animal
@@ -825,7 +825,7 @@ land
 manufactured
 homes
 residential
-timeshares
+timeshare
 real
 estate
 artistic
@@ -859,7 +859,7 @@ goods
 fan
 apparel
 used
-manufacturer
+manufactur
 authenticated
 united
 states
@@ -871,7 +871,7 @@ australia
 oceania
 british
 colonies
-territories
+territorie
 caribbean
 europe
 latin
@@ -890,7 +890,7 @@ club
 passes
 parking
 special
-experiences
+experience
 action
 figures
 beanbag
@@ -902,14 +902,14 @@ battery
 wind-up
 fast
 cereal
-premiums
-marbles
+premium
+marble
 model
-railroads
+railroad
 trains
 models
 kits
-structures
+structure
 preschool
 pretend
 puzzles
@@ -920,7 +920,7 @@ monsters
 space
 slot
 stuffed
-soldiers
+soldier
 character
 airline
 campground
@@ -932,8 +932,8 @@ lodging
 luggage
 rail
 vacation
-packages
-consoles
+package
+console
 inserts
 box
 original
@@ -956,12 +956,12 @@ products
 metaphysical
 personal
 security
-religious
+religion
 reward
 points
-incentives
+incentive
 weird
 stuff
 every
 thing
-auctions
+auction
