@@ -138,3 +138,16 @@ custom MadeShopping Service
 after
 DHL,UPS,EMS,E
 Postage Fees
+*Extra Freight*
+*Extra Service*
+*Easy Buy*
+New Arrival 18
+Extra 
+Payment
+*Pay on Your Order*
+*This link is for*
+Only 
+Checkout 
+*Paid links*
+other
+checkout  link
