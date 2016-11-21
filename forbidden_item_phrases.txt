@@ -151,3 +151,7 @@ Checkout
 *Paid links*
 other
 checkout  link
+*Postage Link*
+*Postage*
+*This Link*
+*Fill the postage*
