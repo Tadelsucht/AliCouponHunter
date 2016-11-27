@@ -1,3 +1,12 @@
+SELECT ID, Shop, Keywords, URL, CheapestItem, CheapestItemPrice
+FROM processed 
+WHERE CheapestItemPrice IS NOT NULL
+	AND CheapestItemPrice > 0.01
+	AND CheapestItemPrice < 0.50
+	AND AddedOrUpdated > DATE(DATE('now'), '-7 day')
+ORDER BY CheapestItemPrice ASC
+
+
 SELECT ID, Shop, Keywords, URL, Discount, MinimumPurchase, CheapestItem, CheapestItemPrice
 FROM processed 
 WHERE Discount IS NOT NULL 
