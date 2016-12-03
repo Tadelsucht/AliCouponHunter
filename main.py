@@ -12,8 +12,8 @@ from BeautifulSoup import BeautifulSoup
 from Database.Table.Processed import Processed
 
 ########## Config ##########
-STOP_CONSECUTIVELY_ERROR_NUMBER = 10
-SLEEP_TIME = 4
+STOP_CONSECUTIVELY_ERROR_NUMBER = 100
+SLEEP_TIME = 5
 SLEEP_TIME_PLUS_MINUS = 1
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            "Accept-Language": "de",
@@ -25,7 +25,7 @@ DB_FILE = "ach.sqlite"
 MAXIMAL_ALREADY_SCANNED_IN_A_ROW_BEFORE_NEXT_WORD = 1000
 NO_SEARCH_RESULTS_COUNTER_MAX = 10
 #EXPIRED_BEFORE_EQUAL_DATETIME = datetime.strptime("2016-09-24 17:00:00.000000", "%Y-%m-%d %H:%M:%S.%f")
-EXPIRED_BEFORE_EQUAL_DATETIME = datetime.now() - timedelta(days=3)
+EXPIRED_BEFORE_EQUAL_DATETIME = datetime.now() - timedelta(days=7)
 EXPIRED_ONLY_WITH_COUPON = True
 SHOP_SEARCH_URL = "http://aliexpress.com/wholesale?SearchText={0}&SortType=price_asc&groupsort=0&isFreeShip=y&isRtl=yes&page={1}"
 MOBILE_ITEM_URL = "https://m.aliexpress.com/search.htm?sortType=PP_A&freeshippingType=f&sellerAdminSeq={0}"
@@ -197,8 +197,11 @@ for item_phrase in item_phrases:
                 logging.error("{0}".format(sys.exc_info()))
                 error_counter += 1
 
-                # Error exit
+		# Error exit
                 possible_error_exit()
+
+		# Protection against search phrase error
+		already_scanned_in_a_row += 1
 
         # Error exit
         possible_error_exit()
