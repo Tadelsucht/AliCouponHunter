@@ -13,8 +13,8 @@ from Database.Table.Processed import Processed
 
 ########## Config ##########
 STOP_CONSECUTIVELY_ERROR_NUMBER = 100
-SLEEP_TIME = 5
-SLEEP_TIME_PLUS_MINUS = 1
+SLEEP_TIME = 10
+SLEEP_TIME_PLUS_MINUS = 3
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
            "Accept-Language": "de",
            'Accept-Encoding': 'deflate'}
