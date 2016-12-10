@@ -202,6 +202,13 @@ for item_phrase in item_phrases:
 
 		# Protection against search phrase error
 		already_scanned_in_a_row += 1
+		
+		sleep_to_prevent_ban()
+		sleep_to_prevent_ban()
+		sleep_to_prevent_ban()
+		sleep_to_prevent_ban()
+		sleep_to_prevent_ban()
+		sleep_to_prevent_ban()
 
         # Error exit
         possible_error_exit()
