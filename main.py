@@ -219,10 +219,10 @@ for item_phrase in item_phrases:
 	
     # Move for item_phrases to already searched
     with io.open(SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
-        for phrase in item_phrases[item_phrases.index(item_phrase)+1:]:
+        for phrase in item_phrases[item_phrases.index(item_phrase):]:
             f.write(phrase + "\r\n")
     already_searched_shop_search_item_phrases = get_list_from_file(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE)
-    already_searched_shop_search_item_phrases.append(item_phrases[item_phrases.index(item_phrase)+1:][0])
+    already_searched_shop_search_item_phrases.append(item_phrases[item_phrases.index(item_phrase)])
     with io.open(ALREADY_SEARCHED_SHOP_SEARCH_ITEM_PHRASES_FILE, 'w', encoding='utf8') as f:
         for phrase in already_searched_shop_search_item_phrases:
             f.write(phrase + "\r\n")
