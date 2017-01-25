@@ -1,4 +1,3 @@
-funny
 germany
 arduino
 tablet
